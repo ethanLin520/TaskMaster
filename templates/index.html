@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <style>
+        .content {
+            margin: 20px;
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 40px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        a {
+            color: blue;
+            text-decoration: none;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1 style="text-align: center">Task Master</h1>
+
+    {% if tasks|length < 1 %}
+    <h2 style="text-align: center">There is no task, add a task to start!</h2>
+    {% else %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>Task</th>
+                <th>Add</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <td>{{ task.content }}</td>
+                <td>{{ task.date_created.date() }}</td>
+                <td>
+                    <a href="/delete/{{ task.id }}">Delete</a>
+                    <br>
+                    <a href="/update/{{ task.id }}">Update</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+    <form action='/' method="POST" style="text-align: center">
+        <input type="text" name="content" id="content" size='30'>
+        <input type="submit" value="Add Task">
+    </form>
+
+</div>
+{% endblock %}
