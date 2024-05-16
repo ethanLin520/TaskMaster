@@ -59,6 +59,14 @@ def update(id):
     else:
         return render_template('update.html', task=task_to_update)
 
+@app.route('/reset')
+def reset():
+    try:
+        db.drop_all()
+        db.create_all()
+        return 'Database reset successful!'
+    except Exception as e:
+        return f'An error occurred: {e}'
 
 if __name__ == '__main__':
     app.run(debug=True)
