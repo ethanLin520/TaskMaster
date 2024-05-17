@@ -56,7 +56,6 @@ def index():
     return render_template('index.html', tasks=user_todos)
 
 @app.route('/add', methods=['POST'])
-@login_required
 def add():
     content = request.form['content']
     new_todo = Todo(content=content, user_id=current_user.id)
@@ -115,12 +114,14 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-        print(user)
         if user:
             if check_password_hash(user.password, form.password.data):
                 login_user(user)
                 return redirect(url_for('index'))
-        flash('Invalid username or password')
+            else:
+                flash('Invalid password. Please try again.')
+        else:
+            flash('Username not found. Please register or try again.')
     return render_template('login.html', form=form)
 
 @app.route('/register', methods=['GET', 'POST'])
