@@ -41,10 +41,6 @@ flask-todo-app/
 └── migrations/
 ```
 
-## Usage
+## Deployment
 
-- **Register**: Create a new account by navigating to the registration page.
-- **Login**: Log in to your account to access your personalized to-do list.
-- **Manage Tasks**: Add, update, and delete tasks from your to-do list.
-- **Logout**: Log out from your account securely.
-
+https://task-master-1-7cc7ba864ad8.herokuapp.com/
